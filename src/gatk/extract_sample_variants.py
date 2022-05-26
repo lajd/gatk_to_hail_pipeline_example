@@ -68,7 +68,7 @@ class ExtractGenomicVariants(GatkCommon):
         self.output_gvcf_dir = join(self._mount_path, ExtractGenomicVariants.SAMPLE_GVCFS_DIR, ExtractGenomicVariants.ORGANISM_NAME)
 
         self._paired_reads_file_bam_uris: List[str] = paired_reads_file_bam_uris if isinstance(paired_reads_file_bam_uris, list) else [paired_reads_file_bam_uris]
-        self._ref_file_fa_gz_uri: str = ref_file_fasta_uri
+        self._ref_file_fa_uri: str = ref_file_fasta_uri
         self._known_sites_vcf_uris: List[str] = known_sites_vcf_uris if isinstance(known_sites_vcf_uris, list) else [known_sites_vcf_uris]
         self.output_gvcf_paths: List[str] = [
             join(self.output_gvcf_dir, filename) for filename in
@@ -126,7 +126,7 @@ class ExtractGenomicVariants(GatkCommon):
         """
         for download_dir, download_uris in [
             (self.reads_dir, self._paired_reads_file_bam_uris),
-            (self.ref_dir, self._ref_file_fa_gz_uri),
+            (self.ref_dir, self._ref_file_fa_uri),
             (self.known_sites_dir, self._known_sites_vcf_uris)
         ]:
             if isinstance(download_uris, str):

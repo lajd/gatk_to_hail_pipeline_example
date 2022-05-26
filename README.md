@@ -143,14 +143,14 @@ KNOWN_SITES_VQSR_URIS = [
 ### Perform variant discovery to obtain analysis-ready variants
 
 ```python
-from src.gatk.extract_genomic_variants import ExtractGenomicVariants
+from src.gatk.extract_sample_variants import ExtractGenomicVariants
 
 variant_discovery = ExtractGenomicVariants(
     volume_hostpath='/data/Genomics',
-    paired_reads_file_bam_uri=READS_BAM_URIS,
-    ref_file_fa_gz_uri=REF_FA_GZ_URI,
-    known_sites_vcf_gz_uri=KNOWN_EXTRACTION_VCF_GZ_URIS,
-    dry_run=True,
+    paired_reads_file_bam_uris=READS_BAM_URIS,
+    ref_file_fasta_uri=REF_FA_GZ_URI,
+    known_sites_vcf_uris=KNOWN_EXTRACTION_VCF_GZ_URIS,
+    dry_run=False,
     spark_driver_memory= '5g',
     spark_executor_memory= '8g',
     java_options= '-Xmx48g',
@@ -165,7 +165,7 @@ print(sample_gvcf_paths)
 ### Curate a genotype dataset and filter low quality variants 
 
 ```python
-from src.gatk.curate_genomic_dataset import CurateGenotypeDataset
+from src.gatk.curate_genotype_dataset import CurateGenotypeDataset
 
 curated_genotyped_dataset = CurateGenotypeDataset(
     volume_hostpath='/data/Genomics',
@@ -181,18 +181,19 @@ curated_genotyped_dataset = CurateGenotypeDataset(
     ],
     known_sites_vqsr=KNOWN_SITES_VQSR_URIS,
     resources=[
-        ('hapmap,known=false,training=true,truth=true,prior=15.0', join(variant_discovery.known_sites_dir, 'hapmap_3.3.b37.vcf')),
-        ('omni,known=false,training=true,truth=false,prior=12.0', join(variant_discovery.known_sites_dir, '1000G_omni2.5.b37.vcf')),
-        ('1000G,known=false,training=true,truth=false,prior=10.0', join(variant_discovery.known_sites_dir, '1000G_phase1.snps.high_confidence.b37.vcf')),
-        ('dbsnp,known=true,training=false,truth=false,prior=2.0', join(variant_discovery.known_sites_dir, 'dbsnp_138.b37.vcf')),
+        ('hapmap,known=false,training=true,truth=true,prior=15.0', 'hapmap_3.3.b37.vcf'),
+        ('omni,known=false,training=true,truth=false,prior=12.0', '1000G_omni2.5.b37.vcf'),
+        ('1000G,known=false,training=true,truth=false,prior=10.0', '1000G_phase1.snps.high_confidence.b37.vcf'),
+        ('dbsnp,known=true,training=false,truth=false,prior=2.0', 'dbsnp_138.b37.vcf'),
     ],
     reference_path=variant_discovery.raw_data_container_paths_map[ExtractGenomicVariants.REFERENCE_DIR],
-    dry_run=True
+    dry_run=False
 )
 
 # Combine sample GVCFs and extract filtered variants for analysis
-filtered_vcf_gz_path = curated_genotyped_dataset.run_pipeline()
-print(filtered_vcf_gz_path)
+filtered_vcf_save_path = curated_genotyped_dataset.run_pipeline()
+
+print(filtered_vcf_save_path)
 # /data/curated_gvcfs/human/gvcf_sample_HG00731_HG00732_HG00733__n_gvcfs_3__intervals_20__annotations_QD_MQ_MQRankSum_ReadPosRankSum_FS_SOR.filtered_variants.g.vcf
 ```
 
@@ -201,7 +202,7 @@ print(filtered_vcf_gz_path)
 ```python
 from src.hail.utils import vcf_path_to_mt, hl
 
-mt = vcf_path_to_mt(filtered_vcf_gz_path)
+mt = vcf_path_to_mt(filtered_vcf_save_path)
 ```
 
 ### Perform analysis
