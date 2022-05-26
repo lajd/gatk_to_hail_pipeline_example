@@ -9,6 +9,7 @@
 __pycache__/
 **/*.log
 build
+**/.ipynb_checkpoints
 
 # WIP investigations
 adam/

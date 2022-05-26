@@ -6,7 +6,7 @@ This repository provides both an example and a scripted procedure for taking raw
 
 In particular, we follow the GATK's steps for germline cohort data as outlined in [Germline-short-variant-discovery-SNPs-Indels](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-).
 
-<img src="https://github.com/lajd/reads-to-analysis-ready-variants/blob/main/src/soccer/resources/germline_corhort_data.png?raw=true" width="350" height="200" />
+<img src="https://github.com/lajd/reads-to-analysis-ready-variants/blob/main/src/resources/germline_corhort_data.png?raw=true" width="700" />
 
 ### Methodology
 
