@@ -2,7 +2,7 @@
 
 
 ## Overview
-This repository provides both an example and a scripted procedure for taking raw genomics reads to analysis ready variants following GATK's best practices.
+This repository provides both an example and a scripted procedure for taking raw genomics reads to analysis ready variants following GATK's best practices, using Python.
 
 In particular, we follow the GATK's steps for germline cohort data as outlined in [Germline-short-variant-discovery-SNPs-Indels](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-).
 
