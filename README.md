@@ -8,6 +8,10 @@ In particular, we follow the GATK's steps for germline cohort data as outlined i
 
 <img src="https://github.com/lajd/reads-to-analysis-ready-variants/blob/main/src/resources/germline_corhort_data.png?raw=true" width="700" />
 
+This pipeline uses the current latest versions of GATK and hail:
+   - GATK: `4.2.6.1`
+   - Hail: `0.2.95`
+
 ### Methodology
 
 #### Obtaining data
