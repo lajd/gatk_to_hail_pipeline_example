@@ -1,0 +1,35 @@
+# General Python
+.idea
+.mypy_cache
+.pytest_cache
+*/*.pyc
+*/*.pyd
+*/**/__pycache__
+*.egg-info
+__pycache__/
+**/*.log
+build
+
+# WIP investigations
+adam/
+igv/
+
+# Generated data dir
+data/
+
+# General extensions
+**/*.gz*
+**/*.adam*
+**/*.fa*
+**/*.fasta*
+**/*.bam*
+**/*.bai*
+**/*.fastq*
+**/*.vcf*
+**/*.g.vcf*
+**/*.tar*
+**/*.mt*
+**/*.crc
+
+# Custom
+**/*abundance*.txt
