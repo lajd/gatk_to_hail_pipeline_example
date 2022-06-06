@@ -125,7 +125,7 @@ READS_BAM_URIS=[
 ]
 
 # Reference genome
-REF_FA_GZ_URI = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fa"
+REF_FA_GZ_URI = "ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz"
 
 # Known sites for variant extraction
 KNOWN_EXTRACTION_VCF_GZ_URIS = [
